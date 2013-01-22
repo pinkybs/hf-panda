@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>{%$columnInfo.column_name%}</title>
+<style type="text/css">
+<!--
+a img,:link img,:visited img {
+	border: 0 none;
+}
+-->
+</style>
+</head>
+<body>
+<div class="main" id="top">
+
+
+	<div class="content" style="padding-top:10px;width:750px;">
+		<div class="chongzhi02"><span style="color:#0C67B6"></span></div>
+		<form method="post" action="">
+			<table width="720" border="0" align="center" cellpadding="0" cellspacing="0" class="congzhitable">
+			{% foreach from=$fieldInfo item=data key=key %}
+				
+				<tr>
+					<td width="120"><strong>{%$data.field_name%}</strong></td>
+					
+					<td width="140" align="center">
+						{% if $data.type ==0 %}
+							<input type="text" name="{%$data.field_db_name%}" value="{%$data.default_value%}" size=30>
+						{%else if $data.type ==1 %}
+							<textarea name="{%$data.field_db_name%}" value="{%$data.default_value%}" rows="{%$data.h%}" cols="{%$data.w%}"></textarea>
+						{%/if%}
+					</td>
+					<td>{%$data.comment%}</td>
+				</tr>
+			{% /foreach %}
+			</table>
+			<table width="720" border="0" align="center" cellpadding="0" cellspacing="0" class="congzhitable">
+				<tr>
+					<td>
+						<input type="hidden" name="action" value="add">
+						<input type="submit" name="add" value="提交">
+					</td>
+				</tr>
+			</table>
+		</form>
+		<div id="logdata"></div>
+	</div>
+</div>
+</body>
+</html>

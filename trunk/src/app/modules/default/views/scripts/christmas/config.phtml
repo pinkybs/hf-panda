@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>圣诞节后台配置</title>
+<style type="text/css">
+table{
+	border: 1px solid #C9C9C9;
+	background: none repeat scroll 0 0 #F5F8FC;
+}
+th{
+	border: 1px solid #C9C9C9;
+}
+.basic-input {
+	border: 1px solid #C9C9C9;
+	border-bottom-left-radius: 3px 3px;
+	border-bottom-right-radius: 3px 3px;
+	border-top-left-radius: 3px 3px;
+	border-top-right-radius: 3px 3px;
+	font-size: 14px;
+	height: 15px;
+	padding: 5px;
+	width: 200px;
+}
+.detail {
+	width:80%;
+}
+</style>
+</head>
+<body>
+<div id="wrapper">
+
+	<div id="content">
+		<div class="grid-8-2 clearfix">
+	    	<div class="article">
+				<form style="margin-left:200px;"name="frm" method="post" action="update" >
+				 <table style="margin-bottom:20px;width:40%;">
+			         <tr>
+			        <th>起始连击数</th>
+			        <td><input type="text" name="Hit" size="20" value="{% $config.Hit %}"/></td>
+			        </tr>
+			         <tr>
+			        <th>连击间隔</th>
+			        <td><input type="text" name="HitInterval" size="20" value="{% $config.HitInterval %}"/></td>
+			        </tr>
+			         <tr>
+			        <th>概率下限</th>
+			        <td><input type="text" name="RateMin" size="20" value="{% $config.RateMin %}"/></td>
+			        </tr>
+			         <tr>
+			        <th>概率上限</th>
+			        <td><input type="text" name="RateMax" size="20" value="{% $config.RateMax %}"/></td>
+			        </tr>
+			         <tr>
+			        <th>掉落铃铛上限制</th>
+			        <td><input type="text" name="Max" size="20" value="{% $config.Max %}"/></td>
+			        </tr>
+			     </table>
+			        <input style="margin-left:200px;"type="submit" value="修改" />
+		       	</form>
+	    	</div>
+	    </div>
+	</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<div class="title" style="background-image:url({%$staticUrl%}/ipanda/image/menu/bg2.gif)">
+	<div class="menu">
+        <ul style="padding-left:170px;width:700px;">
+        	<li style="width:76px;"><a href="http://yingyong.taobao.com/show.htm?app_id=109001" target="_top"><img src="{%$staticUrl%}/ipanda/image/menu/home.gif" title="我的森林" alt="我的森林" /></a></li>
+        	<li style="width:88px;"><a href="#" id="mnuInvite"><img src="{%$staticUrl%}/ipanda/image/menu/invite.gif" title="邀请好友" alt="邀请好友" /></a></li>
+        	<li style="width:96px;margin-top:-6px;"><a id="mnuPay" href="javascript:void(0);"><img src="{%$staticUrl%}/ipanda/image/menu/pay.gif" title="兑换金币" alt="兑换金币" /></a></li>
+        	<li style="width:68px;"><a href="http://bangpai.taobao.com/group/14592801.htm" target="_blank"><img src="{%$staticUrl%}/ipanda/image/menu/forum.gif" title="玩家帮派" alt="玩家帮派" /></a></li>
+        	<li style="width:68px;"><a href="http://bangpai.taobao.com/group/thread/14592801-266247171.htm" target="_blank"><img src="{%$staticUrl%}/ipanda/image/menu/help.gif" title="帮助" alt="帮助" /></a></li>
+        	<li style="width:68px;margin-top: -6px;"><a id="mnuDonate" href="{%$hostUrl%}/donate?skey={%$skey%}" target="_blank"><img src="{%$staticUrl%}/ipanda/image/menu/donate.gif" title="捐赠" alt="捐赠" /></a></li>
+        </ul>
+	</div>
+</div>
+
+<div id="payBox" style="width:750px;height:735px;position:absolute;background-color:#FFFFFF;top:0px;display:none;">
+    <div style="color:blue;position: absolute; left:710px;top:10px;"><a id="mnuPayCls" href="javascript:void(0);"><img src="{%$staticUrl%}/ipanda/image/common/btnClose.png" /></a></div>
+    <div id="divPay" style=""></div>
+</div>
+
+<div id="inviteBox" style="width:750px;height:630px;position:absolute;top:126px;background-color:#FFFFFF;border:2px solid #ffffff;display:none;">
+    <div style="color:blue;position: absolute; left:720px;top:-15px;"><a id="mnuInviteCls" href="javascript:void(0);"><img src="{%$staticUrl%}/ipanda/image/common/btnClose.png" /></a></div>
+    <div id="divInvite" style=""></div>
+</div>
+
+  {% if $showNotice == true %}
+  <div class="guang">
+	<div style="width:600px;height:35px;"> </div>
+	  {% foreach from=$mainNotice item=data %}
+    	  <div class="zleft guang_z">{%if $data.link%}<a href="{%$data.link%}" target="_blank">[{%$data.create_time|date_format:"%Y-%m-%d"%}]  {%$data.title%}</a>{%else%}[{%$data.create_time|date_format:"%Y-%m-%d"%}]  {%$data.title%}{%/if%}</div>
+    	 {% /foreach %}
+</div>
+{% /if %}

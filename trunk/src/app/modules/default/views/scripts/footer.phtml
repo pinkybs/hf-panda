@@ -1,0 +1,162 @@
+
+<div style="width:750px;align:center;text-align:center;font-weight:bold;">
+<div>
+【快乐森林】应用由上海乐鱼数码提供<a href="javascript:addFavorite();"><img src="{%$staticUrl%}/ipanda/image/common/favorite.png" style="top:6px;position:relative;padding-left:10px;padding-right:8px;" /></a>
+</div>
+<div style="color:#3b5998;padding-top:2px;padding-bottom:12px;">门牌号: {%$uid%}<span id="userinfo" style="color:red;"></span></div>
+</div>
+
+<div><input type="hidden" id="J_ShareParam" value='{"client_id":"911"}'><a id="topShareFeed"></a></div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+    	crossFrame.init();
+
+    	//console.debug('init game');
+		var config = {appId:'{%$smarty.const.APP_ID%}', appName:'{%$smarty.const.APP_NAME%}', appHostUrl:'{%$hostUrl%}', appStaticUrl:'{%$staticUrl%}',
+                	  sns:'taobao', uid:'{%$uid%}', puid:'{%$platformUid%}', sessionkey:'{%$skey%}', sessionid:'{%$sessionid%}'};
+		HFApp.init(config);
+
+    	$("#mnuPay,#mnuPayCls,#mnuInvite").unbind('click');
+	    $("#mnuInvite").click(goInvite);
+	    $("#mnuPay").click(showPay);
+	    $("#mnuPayCls").click(showPay);
+    });
+
+    function sendFeed(feed)
+    {
+        //title, comment, description, img, link
+    	var feedSettings = $.parseJSON(feed);
+    	HFApp.feed(feedSettings);
+    }
+
+    function goInvite()
+    {
+    	var feed = {'title':'点击进入快乐森林',
+        			'comment':'快乐森林的建设需要你的帮助，赶快来加入吧~！来见证大熊猫的成长~为大熊猫和他的伙伴们创建家园吧!',
+        			'description':'快乐森林急需管理员，赶快加入我们~！',
+        			'img':'http://tbipandastatic.hapyfish.com/ipanda/image/share/feed.jpg',
+        			'link':HFApp.gameUrl};
+
+    	HFApp.feed(feed);
+    }
+
+    function goPay()
+    {
+    	showPay();
+    }
+
+    function goPayLog()
+    {
+    	showPayLog();
+    }
+
+    function goFans()
+    {
+    	//alert('goFans');
+    	var url = HFApp.appHostUrl + "/signaward/befans";
+		$.ajax({
+            type: 'POST',
+            url: url,
+            dataType: 'json',
+            success: function(resp){
+            	//alert(resp);
+            }
+ 		});
+    }
+
+    function goDonate()
+    {
+    	var goURL = HFApp.appHostUrl + "/donate?skey=" + HFApp.sessionkey;
+    	//window.location = goURL;
+    	window.open(goURL, "ipanda捐赠");
+    }
+
+	function openWindow(url)
+	{
+		window.open(url);
+	}
+
+    function getLoadingHtml()
+    {
+    	var loadingHtml = '<div style="position: absolute; left: 350px; top: 250px;"><img src="'
+        		+ HFApp.appStaticUrl
+        		+ '/ipanda/image/common/loading0.gif" /><br/>加载中......</div>';
+
+		return loadingHtml;
+	}
+
+    function showInvite()
+    {
+    	alert('即将开通');
+    	return;
+    	//if ($("#divPay").html() == '') {
+    	var url = HFApp.appHostUrl + "/invite/top";
+		var pardata = {};
+		var loadingHtml = getLoadingHtml();
+		$("#divInvite").html(loadingHtml);
+		HFApp.loadHtml(url, 'POST', pardata, 'text', 'divInvite');
+    	//}
+		$("#inviteBox").toggle('fast');
+    }
+
+    function showPay(statuson)
+    {
+    	//if ($("#divPay").html() == '') {
+    	var url = HFApp.appHostUrl + "/pay";
+		var pardata = {};
+		var loadingHtml = getLoadingHtml();
+		$("#divPay").html(loadingHtml);
+		HFApp.loadHtml(url, 'POST', pardata, 'text', 'divPay');
+    	//}
+		if (statuson != 1) {
+			$("#payBox").toggle('fast');
+		}
+    }
+
+    function showPayLog(statuson)
+    {
+    	//if ($("#divPay").html() == '') {
+    	var url = HFApp.appHostUrl + "/pay/log";
+		var pardata = {};
+		var loadingHtml = getLoadingHtml();
+		$("#divPay").html(loadingHtml);
+		HFApp.loadHtml(url, 'POST', pardata, 'text', 'divPay');
+    	//}
+    	if (statuson != 1) {
+			$("#payBox").toggle('fast');
+    	}
+    }
+
+	function addFavorite()
+	{
+		var url = HFApp.gameUrl;
+		var title = '快乐森林';
+		if (document.all) {
+			window.external.AddFavorite(url, title);
+		} else if (window.sidebar) {
+			window.sidebar.addPanel(title, url, '');
+		} else if (window.opera && window.print) {
+			var mbm = document.createElement('a');
+			mbm.setAttribute('rel', 'sidebar');
+			mbm.setAttribute('href', url);
+			mbm.setAttribute('title', title);
+			mbm.click();
+		} else {
+			alert('浏览器不支持直接加入收藏夹，请手动添加，快捷键 Ctrl+D');
+		}
+	}
+</script>
+<script type="text/javascript" src="http://toptrace.taobao.com/assets/getAppKey.js" topappkey="{%$smarty.const.APP_KEY%}" defer="defer"></script>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-27943297-1']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+</body>
+</html>

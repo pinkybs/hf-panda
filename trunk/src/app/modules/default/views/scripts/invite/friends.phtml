@@ -1,0 +1,127 @@
+<style type="text/css">
+    html, body { height:100%; }
+    body { margin:0; }
+    .yaoqing02-1{ width:748px; height:68px; background-image:url({%$staticUrl%}/ipanda/image/invite/invitebg.gif);}
+    .yaoqing02-2{
+    	width:790px;
+    	height:380px;
+    	background-image:url({%$staticUrl%}/ipanda/image/invite/bg_middle.gif);
+    	padding-top: 10px;
+    	padding-left: 10px;
+    	background-repeat: repeat-y;
+    }
+    .yaoqing02-3{ width:748px; height:37px; background-image:url({%$staticUrl%}/ipanda/image/invite/bg_13.gif);}
+    .mingzikuang{
+    	width:155px;
+    	height:76px;
+    	border: 2px solid #d7f0fb;
+    	background-color: #FFFFFF;
+    	padding-left: 10px;
+    }
+    .duoxuan{
+    	width:22px;
+    	height:45px;
+    	float: left;
+    	padding-top: 30px;
+    	}
+    .touxiang{
+    	width:67px;
+    	height:69px;
+    	background-repeat: no-repeat;
+    	float: left;
+    	margin-top: 6px;
+    }
+    .mingzi{
+    	width:63px;
+    	height:65px;
+    	float: left;
+    	padding-top: 10px;
+    }
+</style>
+
+<div class="main">
+	{%if $count == 0%}
+	<br /><br /><br />
+	<div style="text-align:center;">您的所有平台好友已全都加入快乐森林!</div>
+	{%else%}
+	<div class="content">
+        <div class="yaoqing02-1"><img src="{%$staticUrl%}/ipanda/image/invite/invitebg2.gif" /></div>
+        <div class="yaoqing02-2">
+        {% foreach from=$pageArray item=page key=key %}
+        <div class="songli2-right" id="page{%$key+1%}" style="height:360px; width:700px;{% if $key>0 %}display:none;{%/if%}" >
+            <ul>
+                {%foreach from=$friendsArray[$key] item=friend%}
+                <li style="float:left; padding:2px;">
+                    <div class="mingzikuang">
+                        <div class="duoxuan">
+                          <p><input name="ids" type="checkbox" value="{%$friend.uid%}" /></p>
+                        </div>
+                        <div class="touxiang"><img width="60px" height="60px" src="{%$friend.thumbnail%}" /></div>
+                        <div class="mingzi">{%$friend.name|escape%}</div>
+                    </div>
+                </li>
+                {%/foreach%}
+            </ul>
+        </div>
+
+        {% /foreach %}
+        </div>
+        <div class="yaoqing02-3">
+
+        {% if $pageCount > 1 %}
+        <div align="right" style="width:650px">
+            {% foreach from=$pageArray item=page key=key %}
+               <a href="javascript:void(0);" onclick="goPage({%$key+1%});"> {%$key+1%} </a>&nbsp;
+                {% /foreach %}
+            </div>
+          {% /if %}
+        </div>
+        <div class="mashangyaoqing">
+          <div align="center"><input type="image" onclick="send();" src="{%$staticUrl%}/ipanda/image/invite/btnInvite.gif" alt="马上邀请" /></div>
+        </div>
+    </div>
+	{%/if%}
+</div>
+
+<script type="text/javascript">
+    var PAGE_NUM = {%$pageCount%};
+    function hideAllPage()
+    {
+        var page = null;
+        for(var i = 1; i <= PAGE_NUM; i++) {
+            page = document.getElementById('page' + i);
+            if (page) {
+                page.style.display = 'none';
+            }
+        }
+    }
+
+    function goPage(i)
+    {
+        var page = document.getElementById('page' + i);
+        if (page) {
+            hideAllPage();
+            page.style.display = 'block';
+        }
+    }
+
+    function send()
+    {
+        var selIds = '';
+    	$("input[name='ids']:checkbox:checked").each(function() {
+    		selIds += ',' + $(this).val();
+    	});
+
+    	if (selIds) {
+    		var url = HFApp.appHostUrl + "/invite/send";
+    		var pardata = {"ids":selIds.substr(1)};
+    		$("#divInvite").html('加载中...');
+    		HFApp.loadHtml(url, 'POST', pardata, 'text', 'divInvite');
+        }
+    	else {
+        	alert('请至少选择一个好友发送邀请');
+    	}
+
+    }
+
+</script>

@@ -1,0 +1,67 @@
+<link href="{%$staticUrl%}/ipanda/pay_2011121201.css?v=1.00" rel="stylesheet" type="text/css" />
+<script src="{%$staticUrl%}/js/jquery-1.4.3.min.js" type="text/javascript"></script>
+<script src="{%$staticUrl%}/ipanda/js/pay.js?v=2011121201" type="text/javascript"></script>
+<div class="main">
+	<div class="chongzhicontent">
+		<img src="{%$user.face%}" width="59" height="60" />
+		<div class="xinxi">
+			<div class="cname">{%$user.name|escape%}</div>
+			<div class="shuzi" style="background-image:url({%$staticUrl%}/ipanda/image/pay/jinbi.png)">金币： <span style="color:#3c7e9a;font-weight:bold;">{%$user.gold%}</span></div>
+		</div>
+	</div>
+	
+	<div class="table">
+		<ul>
+		<li style="width:50px"></li>
+		<li><a href="#"><div class="nav_01">充值</div></a></li>
+		<li><a href="#" onclick="showPayLog(1);"><div class="nav_02">充值记录</div></a></li>
+		<!-- <li><a href="{%$baseUrl%}/consumelogs/gold"><div class="nav_02">消费记录</div></a></li>
+		<li><a href="{%$baseUrl%}/pay/listorder"><div class="nav_02">订单查询</div></a></li> -->
+		</ul>
+	</div>
+
+	<div class="content" style="padding-top:0px;height:400px;width:750px;">
+		<form id="frmPayOrder" method="get" target="_blank" action="{%$baseUrl%}/pay/route" style="padding-top:1px">
+			<input type="hidden" id="skey" name="skey" value="{%$skey%}" />
+			<input type="hidden" id="type_id" name="type_id" value="" />
+{% foreach from=$section key=k item=v %}
+{% if $v.open == 1 %}
+			<div class="chongzhi">
+				<div class="chongzhi-ed"><img src="{%$staticUrl%}/ipanda/image/pay/{%$v.gold.img%}" title="{%$v.gold.title%}" /></div>
+				<div class="chongzhi-bg">
+{% foreach from=$v.include item=v2 %}
+{% if $v2.cid>0 && $v2.num>0 %}
+					<div class="chongzhi-item">
+{% if $v2.limit == 1 %}
+                    	<div class="xian"><img src="{%$staticUrl%}/ipanda/image/pay/timelimit.gif" /></div>
+{% /if %}
+{% if $v2.num == 1 %}
+						<img src="{%$staticUrl%}/ipanda/image/pay/include/item/{%$v2.cid%}.png" />
+{% else %}
+						<img src="{%$staticUrl%}/ipanda/image/pay/include/item/{%$v2.cid%}-{%$v2.num%}.png" />
+{% /if %}
+					</div>
+{% /if %}
+{% /foreach %}
+				</div>
+				<div class="chongzhi-bt"><input type="image" src="{%$staticUrl%}/ipanda/image/pay/{%$v.btn.img%}" name="btnOrder{%$k%}" id="btnOrder{%$k%}" value="充值" class="orderbtn" onclick="HFPay.post('frmPayOrder', {%$v.id%});return false;" /></div>
+			</div>
+{% /if %}
+{% /foreach %}
+		</form>
+	</div>
+
+	<div class="clear"></div>
+    <div class="xianshi" style="width:720px;height:80px;clear:both;margin-left:40px;padding-top:15px;">
+    	{%$note%}
+    </div>
+	<div style="color:grey;padding:20px 10px 20px 40px;">
+        <div style="background: url('{%$staticUrl%}/ipanda/image/pay/alipay.gif') no-repeat scroll right bottom transparent;height:60px;">
+        	客服提示：如果有支付相关的疑问，请旺旺联系我们的客服：
+        	<a href="http://amos1.taobao.com/msg.ww?v=2&uid=快乐森林灵灵&s=1" target="_blank"><img border="0" alt="快乐森林灵灵" src="http://amos1.taobao.com/online.ww?v=2&uid=快乐森林灵灵&s=1"></a>
+        	<br>
+        	您即将付款给本款应用的开发者 ，淘宝在此不参与任何收费分成。<br>
+        	如遇应用故障或收费问题由开发者独立向您承担责任，淘宝不承担本款应用引发的责任。
+        </div>
+	</div>
+</div>

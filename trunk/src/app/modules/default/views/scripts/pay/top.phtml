@@ -1,0 +1,100 @@
+
+<link href="{%$staticUrl%}/ipanda/pay_2011031501.css?v=1.00" rel="stylesheet" type="text/css" />
+<style type="text/css">
+    html, body { height:100%; }
+    body { margin:0; }
+</style>
+
+<div class="main">
+	<div class="chongzhicontent">
+		<img src="{%$user.face%}" width="59" height="60" />
+		<div class="xinxi">
+			<div class="cname">{%$user.name|escape%}</div>
+			<div class="shuzi" style="background-image:url({%$staticUrl%}/ipanda/image/pay/jinbi.png)">金币： <span style="color:#3c7e9a;font-weight:bold;">{%$user.gold%}</span></div>
+		</div>
+	</div>
+
+	<div class="table">
+		<ul>
+		<li style="width:50px"></li>
+		<li><a href="#"><div class="nav_01">充值</div></a></li>
+		<li><a href="#" onclick="showPayLog(1);"><div class="nav_02">充值记录</div></a></li>
+		<!-- <li><a href="{%$baseUrl%}/consumelogs/gold"><div class="nav_02">消费记录</div></a></li>
+		<li><a href="{%$baseUrl%}/pay/listorder"><div class="nav_02">订单查询</div></a></li> -->
+		</ul>
+	</div>
+
+	<div class="content" style="padding-top:10px;padding-left:50px;height:300px">
+		<div style="color:red;padding:0 0 10px 0;">
+
+		</div>
+		<form id="frmPayOrder" method="get" target="_blank" action="{%$baseUrl%}/pay/gopay" style="padding-top:20px">
+			<!-- <div class="chongzhi" style="margin:40px 0 0 0;">
+				<div align="center">
+					<p><img src="{%$staticUrl%}/ipanda/image/pay/1.gif" id="dm1" class="diamond" title="兑换10金币"/><br />
+						价格：1元<br />
+						<input type="submit" name="btnOrder1" id="btnOrder1" value="充值" class="orderbtn" class="diamond" />
+					</p>
+					<label></label>
+				</div>
+			</div>-->
+			<div class="chongzhi" style="margin:40px 0 0 0;">
+				<div align="center">
+					<p><img src="{%$staticUrl%}/ipanda/image/pay/2.gif"  id="dm2" class="diamond" title="兑换100金币，送5金币" /><br />
+						价格：10元<br />
+						<input type="submit" name="btnOrder2" id="btnOrder2" value="充值" class="orderbtn" class="diamond" />
+					</p>
+					<label></label>
+				</div>
+			</div>
+			<div class="chongzhi" style="margin:40px 0 0 0;">
+				<div align="center">
+					<p><img src="{%$staticUrl%}/ipanda/image/pay/3.gif" id="dm3" class="diamond" title="兑换200金币，送10金币" /><br />
+						价格：20元<br />
+						<input type="submit" name="btnOrder3" id="btnOrder3" value="充值" class="orderbtn" class="diamond" />
+					</p>
+					<label></label>
+				</div>
+			</div>
+			<div class="chongzhi" style="margin:40px 0 0 0 ;">
+				<div align="center">
+					<p><img src="{%$staticUrl%}/ipanda/image/pay/4.gif" id="dm4" class="diamond" title="兑换500金币，送80金币"/><br />
+						价格：50元<br />
+						<input type="submit" name="btnOrder4" id="btnOrder4" value="充值" class="orderbtn" class="diamond" />
+					</p>
+					<label></label>
+				</div>
+			</div>
+			<div class="chongzhi" style="margin:40px 0 0 0;">
+				<div align="center">
+					<p><img src="{%$staticUrl%}/ipanda/image/pay/5.gif" id="dm5" class="diamond" title="兑换1000金币，送200金币"/><br />
+						价格：100元<br />
+						<input type="submit" name="btnOrder5" id="btnOrder5" value="充值" class="orderbtn" class="diamond" />
+					</p>
+					<label></label>
+				</div>
+			</div>
+			<!--
+			<div class="chongzhi" style="margin:40px 0 0 0;">
+				<div align="center">
+					<p><img src="{%$staticUrl%}/ipanda/image/pay/4_9.gif" id="dm5" class="diamond" onclick="payOrder('frmPayOrder', 500);" title="兑换5000金币，送800金币"/><br />
+						价格：500元<br />
+						<input type="button" name="btnOrder5" id="btnOrder5" onclick="payOrder('frmPayOrder', 500);" value="充值" class="orderbtn" class="diamond" />
+					</p>
+					<label></label>
+				</div>
+				</div>
+				-->
+		</form>
+	</div>
+
+	<div style="color: grey;padding: 80px 10px 20px 40px;">
+        <div style="background: url('{%$staticUrl%}/ipanda/image/pay/alipay.gif') no-repeat scroll right bottom transparent;height:60px;">
+        	客服提示：如果有支付相关的疑问，请旺旺联系我们的客服：
+        	<a href="http://amos1.taobao.com/msg.ww?v=2&uid=快乐森林灵灵&s=1" target="_blank"><img border="0" alt="快乐森林灵灵" src="http://amos1.taobao.com/online.ww?v=2&uid=快乐森林灵灵&s=1"></a>
+        	<br>
+        	您即将付款给本款应用的开发者 ，淘宝在此不参与任何收费分成。<br>
+        	如遇应用故障或收费问题由开发者独立向您承担责任，淘宝不承担本款应用引发的责任。
+        </div>
+	</div>
+</div>

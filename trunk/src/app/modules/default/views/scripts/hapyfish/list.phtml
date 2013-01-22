@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>列表-{%$columnInfo.column_name%}</title>
+<style type="text/css">
+<!--
+a img,:link img,:visited img {
+	border: 0 none;
+}
+-->
+</style>
+ <script type="text/javascript">
+function diag()
+{
+    var str=prompt("输入密码");
+	if(str)
+	{
+		if(confirm("确认清空"))
+		{
+			location.href = "clear?column_no={%$columnInfo.column_no%}&str="+str;
+		}
+    }
+    return;
+}
+
+</script>
+</head>
+<body>
+<div>
+
+
+	<div class="content" style="padding-top:10px;">
+		<div class="chongzhi02" style="width:1024px;"><span style="color:#0C67B6;float:left;"><a href="add?column_no={%$columnInfo.column_no%}">add</a></span> <span style="color:#0C67B6;float:right;"><a onclick="diag()">清空</a></span></div>
+			<form method="get" action="list?column_no={%$columnInfo.column_no%}">
+				<table>
+					<tr><td><input type="text" name="keyword"></td>
+					<td><select name="field">
+						{% foreach from=$fieldInfo item=data1 key=key %}
+							<option value ="{%$data1.field_db_name%}">{%$data1.field_name%}</option>
+						{% /foreach %}
+					</select><input type="submit" value="查找"><input type="hidden" name="column_no" value="{%$columnInfo.column_no%}"></td></tr>
+				</table>
+			</form>
+			<table width="{%$width%}" border="1" align="center" cellpadding="0" cellspacing="0" class="congzhitable">
+			<tr>
+			{% foreach from=$fieldInfo item=data key=key %}	
+					<td width="100" ><strong>{%$data.field_name%}</strong></td>
+			{% /foreach %}
+			<td width="100"><strong>操作</strong></td>
+			</tr>
+			{% foreach from=$list item=datalist key=key %}	
+				<tr>
+				{% foreach from=$datalist item=data key=key %}	
+					{% if $key != 'primaryKey' %}
+						<td ><strong>{%$data%}</strong></td>
+					{%/if%}
+				{% /foreach %}
+				<td ><strong><a href="edit?column_no={%$columnInfo.column_no%}&cid={%$datalist.primaryKey%}">编辑</a></strong>&nbsp;&nbsp; <strong>删除</strong></td>
+				</tr>
+			{% /foreach %}
+
+			</table>
+			<table  border="0" align="center" cellpadding="0" cellspacing="0" class="congzhitable">
+				<tr>
+					<td>
+						{%$fengye%}
+					</td>
+				</tr>
+			</table>
+			<form method="post" action="import?column_no={%$columnInfo.column_no%}" enctype= "multipart/form-data">
+			<table  border="0" align="center" cellpadding="0" cellspacing="0" class="congzhitable">
+				<tr>
+					<td>
+						<input type="file" name="filename"><input type="submit" name="import" value="导入数据">
+						</td>
+				</tr>
+			</table>
+			</form>
+		<div id="logdata"></div>
+	</div>
+</div>
+</body>
+</html>

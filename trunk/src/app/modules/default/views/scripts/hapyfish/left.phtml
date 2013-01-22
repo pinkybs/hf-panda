@@ -1,0 +1,23 @@
+<html>
+<head>
+<title>管理中心</title>
+<meta http-equiv=Content-Type content=text/html;charset=gb2312>
+</head>
+
+	<body>
+		<table width="200">
+			{% foreach from=$list item=data key=key %}	
+			<tr ><td width="200">
+				<a href="list?column_no={%$data.column_no%}" target="main">{%$data.column_name%}</a>
+			</td></tr>
+			{% /foreach %}
+			<tr >
+				<td width="200"><a href="/tools/loadinitdataofall" target="main">清缓存</a></td>
+			</tr>
+			<tr >
+				<td width="200"><a href="/tools/reloadgiftall" target="main">清礼物缓存</a></td>
+			</tr>
+		</table>
+	</body>
+
+</html>
